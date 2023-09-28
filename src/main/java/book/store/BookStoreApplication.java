@@ -2,13 +2,12 @@ package book.store;
 
 import book.store.model.Book;
 import book.store.service.BookService;
+import java.math.BigDecimal;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
-
-import java.math.BigDecimal;
 
 @SpringBootApplication
 public class BookStoreApplication {
@@ -28,7 +27,8 @@ public class BookStoreApplication {
                 kobzar.setTitle("Кобзар");
                 kobzar.setAuthor("Т.Г.Шевченко");
                 kobzar.setPrice(BigDecimal.valueOf(300));
-                kobzar.setDescription("Перша книга-збірка поетичних творів Тараса Шевченка 1840 року");
+                kobzar.setDescription("Перша книга-збірка поетичних творів"
+                        + " Тараса Шевченка 1840 року");
                 kobzar.setIsbn("1222 1211 12121");
 
                 bookService.save(kobzar);
