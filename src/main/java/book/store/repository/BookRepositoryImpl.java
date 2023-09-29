@@ -1,7 +1,9 @@
 package book.store.repository;
 
 import book.store.model.Book;
+import jakarta.persistence.EntityManager;
 import java.util.List;
+import java.util.Optional;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
@@ -10,7 +12,6 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public class BookRepositoryImpl implements BookRepository {
-
     private final SessionFactory sessionFactory;
 
     @Autowired
@@ -47,6 +48,14 @@ public class BookRepositoryImpl implements BookRepository {
                     "select b from Book b", Book.class).getResultList();
         } catch (Exception e) {
             throw new RuntimeException("Can't get all books", e);
+        }
+    }
+
+    @Override
+    public Optional<Book> findById(Long id) {
+        try (EntityManager entityManager = sessionFactory.createEntityManager()) {
+            Book book = entityManager.find(Book.class, id);
+            return Optional.ofNullable(book);
         }
     }
 }
